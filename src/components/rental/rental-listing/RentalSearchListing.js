@@ -39,17 +39,18 @@ class RentalSearchListing extends React.Component {
   renderTitle() {
     const { errors, data } = this.props.rentals;
     const { searchedCity } = this.state;
-    let title = '';
+    let title ='';
 
     if (errors.length > 0) {
-      title = errors[0].detail;
+      title = `Jelenleg még nincs ${toUpperCase(searchedCity)} Oktatónk`
     }
 
     if(data.length > 0) {
-      title = `Your Home in City of ${toUpperCase(searchedCity)}`;
+      title = `Az általad keresett ${toUpperCase(searchedCity)} Oktatók`;
     }
 
-    return <h1 className="page-title">{title}</h1>
+
+    return <h1 className="page-title">{title} </h1>
   }
 
   render() {

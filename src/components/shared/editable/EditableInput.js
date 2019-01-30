@@ -28,10 +28,10 @@ export class EditableInput extends EditableComponent {
                  className={className} />
           <button onClick={() => this.update() }
                   className='btn btn-success btn-editable'
-                  type='button'> Save </button>
+                  type='button'> Mentés </button>
           <button onClick={() => this.disableEdit() }
                   className='btn btn-warning btn-editable'
-                  type='button'> Close </button>
+                  type='button'> Mégse </button>
         </React.Fragment>
       )
     }
@@ -41,7 +41,7 @@ export class EditableInput extends EditableComponent {
         <span className={className}> {this.formatView(value)} </span>
         <button onClick={() => this.enableEdit() }
                 className='btn btn-warning btn-editable'
-                type='button'> Edit </button>
+                type='button'> Szerkeszt </button>
       </React.Fragment>
     )
   }

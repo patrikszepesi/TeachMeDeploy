@@ -7,19 +7,26 @@ export function BookingModal(props) {
 
   return (
     <Modal open={open} onClose={closeModal} little classNames={{ modal: 'booking-modal' }}>
-     <h4 className='modal-title title'>Confirm Booking </h4>
-     <p className='dates'>{booking.startAt} / {booking.endAt}</p>
+     <h4 className='modal-title title'>Jelentekzés Beküldése</h4>
+     <p className='dates'> Elérhetőséged : {booking.usrContact}</p>
      <div className='modal-body'>
-      <em>{booking.days}</em> nights /
-      <em>{rentalPrice}$</em> per Night
-      <p>Guests: <em>{booking.guests}</em></p>
-      <p>Price: <em>{booking.totalPrice}$ </em></p>
-      <p>Do you confirm your booking for selected days?</p>
+
+      <em>{rentalPrice} HUF</em> per Óra
+
+        <p>Neved: <em>{booking.guests}</em></p>
+      <p>Időpont <em>{booking.when}</em></p>
+        <p><em>{booking.time}</em></p>
+
+        <p>A Foglalásodat a -Profile Kezelése-</p>
+      <p> majd az -Általad Foglalt Oktató- menüpont</p>
+      <p>alatt találod</p>
+        <p>Az óra után szintén ott tudod</p>
+        <p>Értékelni az Oktatódat</p>
     </div>
     <BwmResError errors={errors} />
     <div className='modal-footer'>
-      <button onClick={confirmModal} type='button' className='btn btn-bwm'>Confirm</button>
-      <button type='button' onClick={closeModal} className='btn btn-bwm'>Cancel</button>
+      <button onClick={confirmModal} type='button' className='btn btn-bwm'>Elfogad</button>
+      <button type='button' onClick={closeModal} className='btn btn-bwm'>Mégsem</button>
     </div>
   </Modal>
   )

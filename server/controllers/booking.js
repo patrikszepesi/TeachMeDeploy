@@ -5,10 +5,10 @@ const { normalizeErrors } = require('../helpers/mongoose');
 const moment = require('moment');
 
 exports.createBooking = function(req, res) {
-  const { startAt, endAt, totalPrice, guests, days, rental } = req.body;
+  const { startAt, endAt, totalPrice, guests, days, rental,time,usrContact,about,what,when } = req.body;
   const user = res.locals.user;
 
-  const booking = new Booking({ startAt, endAt, totalPrice, guests, days});
+  const booking = new Booking({ startAt, endAt, totalPrice, guests, days,time,usrContact,about,what,when});
 
   Rental.findById(rental._id)
         .populate('bookings')
@@ -20,7 +20,7 @@ exports.createBooking = function(req, res) {
     }
 
     if (foundRental.user.id === user.id) {
-      return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'Cannot create booking on your Rental!'}]});
+      return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'Nem lehet foglalni a Saját órádra!'}]});
     }
 
     if (isValidBooking(booking, foundRental)) {
@@ -40,7 +40,7 @@ exports.createBooking = function(req, res) {
       });
     } else {
 
-       return res.status(422).send({errors: [{title: 'Invalid Booking!', detail: 'Choosen dates are already taken!'}]});
+       return res.status(422).send({errors: [{title: 'Invalid Booking!', detail: 'Ez már foglalt'}]});
     }
   })
 }
@@ -63,7 +63,7 @@ exports.getUserBookings = function(req, res) {
 
 function isValidBooking(proposedBooking, rental) {
   let isValid = true;
-
+/*
   if (rental.bookings && rental.bookings.length > 0) {
 
     isValid = rental.bookings.every(function(booking) {
@@ -75,7 +75,7 @@ function isValidBooking(proposedBooking, rental) {
 
       return ((actualStart < proposedStart && actualEnd < proposedStart) || (proposedEnd < actualEnd && proposedEnd < actualStart));
     });
-  }
+  }*/
 
   return isValid;
 }

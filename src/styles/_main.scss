@@ -32,9 +32,21 @@
   color: #d68000;
 }
 
+.btn-bwm-cool {
+  background-color: black;
+  border-color: white;
+  color: white;
+  padding: 15px 30px;
+  font-size: 20px;
+
+  &:hover, &:focus, &:active {
+    border-color: white !important;
+    background-color: $main-color  !important;
+  }
+}
 .btn-bwm {
   background-color: $main-color;
-  border-color: $main-color;
+  border-color: $main-color ;
   color: white;
   padding: 15px 30px;
   font-size: 20px;

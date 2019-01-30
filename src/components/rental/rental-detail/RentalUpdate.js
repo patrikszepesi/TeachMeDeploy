@@ -4,7 +4,7 @@ import RentalMap from './RentalMap';
 import Booking from 'components/booking/Booking';
 
 import { UserGuard } from '../../shared/auth/UserGuard';
-import { RentalAssets } from './RentalAssets';
+//import { RentalAssets } from './RentalAssets';
 import { toUpperCase } from 'helpers';
 
 import { EditableInput } from '../../shared/editable/EditableInput';
@@ -80,7 +80,7 @@ class RentalUpdate extends React.Component {
                                  updateEntity={this.updateRental}> </EditableImage>
                 </div>
                 <div className='col-md-6'>
-                  <RentalMap location={`${rental.city}, ${rental.street}`} />
+                  <RentalMap location={`${rental.city2}, ${rental.street}`} />
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@ class RentalUpdate extends React.Component {
               <div className='row'>
                 <div className='col-md-8'>
                   <div className='rental'>
-                    <label className={`rental-label rental-type ${rental.category}`}> Shared </label>
+                    <label className={`rental-label rental-type ${rental.category}`}> Csoportos óra? </label>
                     <EditableSelect entity={rental}
                                     entityField={'shared'}
                                     className={`rental-type ${rental.category}`}
@@ -103,13 +103,13 @@ class RentalUpdate extends React.Component {
                                     entityField={'category'}
                                     className={`rental-type ${rental.category}`}
                                     updateEntity={this.updateRental}
-                                    options={['apartment', 'house', 'condo']}
+                                    options={['Egyetemi Tanár', 'Főiskolai Tanár','Középiskolai Tanár','Phd Hallgató', 'Teljes Állásban dolgozó','Egyetemi Demonstrátor','Gyakornok','Harmadéves Hallgató','Másodéves Hallgató','Elsőéves Hallgató','Középiskolai Diák','Egyéb']}
                                     errors={errors}
                                     resetErrors={this.resetRentalErrors} />
 
 
                     <div className="rental-owner">
-                      <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="owner"/>
+
                       <span>{rental.user && rental.user.username}</span>
                     </div>
 
@@ -127,6 +127,11 @@ class RentalUpdate extends React.Component {
                                    errors={errors}
                                    formatPipe={[toUpperCase]}
                                    resetErrors={this.resetRentalErrors} />
+                    <EditableInput entity={rental}
+                                   entityField={'city2'}
+                                   updateEntity={this.updateRental}
+                                   errors={errors}
+                                  resetErrors={this.resetRentalErrors}  />
 
                     <EditableInput entity={rental}
                                    entityField={'street'}
@@ -135,17 +140,43 @@ class RentalUpdate extends React.Component {
                                    errors={errors}
                                    resetErrors={this.resetRentalErrors} />
 
+                    <EditableInput entity={rental}
+                                    entityField={'available'}
+                                    updateEntity={this.updateRental}
+                                    errors={errors}
+                                    resetErrors={this.resetRentalErrors}  />
+
+                    <EditableInput entity={rental}
+                                    entityField={'dailyRate'}
+                                    updateEntity={this.updateRental}
+                                    errors={errors}
+                                    resetErrors={this.resetRentalErrors}  />
+
+
+                    <EditableInput entity={rental}
+                                    entityField={'email'}
+                                    updateEntity={this.updateRental}
+                                    errors={errors}
+                                    resetErrors={this.resetRentalErrors}  />
+
+                    <EditableInput entity={rental}
+                                    entityField={'contact2'}
+                                    updateEntity={this.updateRental}
+                                    errors={errors}
+                                    resetErrors={this.resetRentalErrors}  />
+
+
+
                     <div className='rental-room-info'>
-                      <span><i className='fa fa-building'></i>
+
                         <EditableInput entity={rental}
                                    entityField={'bedrooms'}
                                    className={'rental-bedrooms'}
                                    containerStyle={{'display': 'inline-block'}}
                                    updateEntity={this.updateRental}
                                    errors={errors}
-                                   resetErrors={this.resetRentalErrors}  /> bedrooms</span>
-                      <span><i className='fa fa-user'></i> {rental.bedrooms + 4} guests</span>
-                      <span><i className='fa fa-bed'></i> {rental.bedrooms + 2} beds</span>
+                                   resetErrors={this.resetRentalErrors}  />
+
                     </div>
                     <EditableText  entity={rental}
                                    entityField={'description'}
@@ -156,7 +187,7 @@ class RentalUpdate extends React.Component {
                                    errors={errors}
                                    resetErrors={this.resetRentalErrors}  />
                     <hr></hr>
-                    <RentalAssets />
+
                   </div>
                 </div>
                 <div className='col-md-4'>

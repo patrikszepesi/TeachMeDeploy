@@ -55,15 +55,14 @@ export class RentalManage extends React.Component {
     return (
       <section id='userRentals'>
         <ToastContainer />
-        <h1 className='page-title'>My Rentals</h1>
+        <h1 className='page-title'>Általam Oktatott Tantárgyak</h1>
         <div className='row'>
         {this.renderRentalCards(userRentals)}
         </div>
         { !isFetching && userRentals.length === 0 &&
           <div className='alert alert-warning'>
-            You dont have any rentals currenty created. If you want advertised your property
-            please follow this link.
-            <Link style={{'marginLeft': '10px'}} className='btn btn-bwm' to='/rentals/new'>Register Rental</Link>
+            Jelenleg nem vagy oktató, de kövesd a linket és könnyen lehetsz
+            <Link style={{'marginLeft': '10px'}} className='btn btn-bwm' to='/rentals/new'>Oktató akarok lenni</Link>
           </div>
         }
       </section>

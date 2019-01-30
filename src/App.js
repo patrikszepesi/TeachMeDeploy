@@ -11,6 +11,8 @@ import RentalDetail from 'components/rental/rental-detail/RentalDetail';
 import RentalUpdate from 'components/rental/rental-detail/RentalUpdate';
 import { RentalCreate } from 'components/rental/rental-create/RentalCreate';
 import Login from 'components/login/Login';
+import About from 'components/login/About';
+import Help from 'components/login/Help';
 import { Register } from 'components/register/Register';
 
 import { RentalManage } from 'components/rental/rental-manage/RentalManage';
@@ -57,6 +59,8 @@ class App extends Component {
               <Route exact path='/rentals/:id' component={RentalDetail} />
               <Route exact path='/rentals/:id/edit' component={RentalUpdate} />
               <Route exact path='/login' component={Login} />
+              <Route exact path='/about' component={About} />
+              <Route exact path='/help' component={Help} />
               <LoggedInRoute exact path='/register' component={Register} />
             </Switch>
           </div>

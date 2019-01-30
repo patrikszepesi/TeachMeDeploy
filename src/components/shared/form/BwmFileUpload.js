@@ -15,7 +15,7 @@ export class BwmFileUpload extends React.Component {
       selectedFile: undefined,
       imageBase64: '',
       initialImageBase64: '',
-      croppedImage: {},
+      croppedImage: undefined,
       pending: false,
       status: 'INIT',
       crop: {}
@@ -45,7 +45,7 @@ export class BwmFileUpload extends React.Component {
       pending: false,
       status,
       selectedFile: undefined,
-      croppedImage: {},
+      croppedImage: undefined,
       initialImageBase64: '',
       imageBase64: ''
     });
@@ -113,12 +113,13 @@ export class BwmFileUpload extends React.Component {
   }
 
   uploadImage() {
-    const { croppedImage } = this.state;
+    const { croppedImage, selectedFile } = this.state;
+    const imageToUpload = croppedImage || selectedFile;
 
-    if (croppedImage) {
+    if (imageToUpload) {
 
       this.setState({pending: true, status: 'INIT'});
-      actions.uploadImage(croppedImage).then(
+      actions.uploadImage(imageToUpload).then(
         (uploadedImage) => { this.onSuccess(uploadedImage) },
         (error) => { this.onError(error)})
     }
@@ -141,11 +142,11 @@ export class BwmFileUpload extends React.Component {
     const { status } = this.state;
 
     if (status === 'OK') {
-      return <div className='alert alert-success'> Image Uploaded Succesfuly! </div>
+      return <div className='alert alert-success'> Sikeres Kép Feltöltés </div>
     }
 
     if (status === 'FAIL') {
-      return <div className='alert alert-danger'> Image Upload Failed! </div>
+      return <div className='alert alert-danger'> Sikertelen Feltöltés </div>
     }
   }
 
@@ -155,7 +156,7 @@ export class BwmFileUpload extends React.Component {
     return (
       <div className='img-upload-container'>
         <label className='img-upload btn btn-bwm'>
-         <span className='upload-text'> Select an image </span>
+         <span className='upload-text'> Profilkép Feltöltése </span>
          <input type='file'
                 accept='.jpg, .png, .jpeg'
                 onChange={this.onChange}/>
@@ -166,7 +167,7 @@ export class BwmFileUpload extends React.Component {
                   type='button'
                   disabled={!selectedFile}
                   onClick={() => this.uploadImage()}>
-              Upload Image
+              Kép Feltöltése
           </button>
         }
 
@@ -181,7 +182,7 @@ export class BwmFileUpload extends React.Component {
         { imageBase64 &&
           <div className='img-preview-container'>
             <div className='img-preview'
-                 style={{'backgroundImage': 'url(' + imageBase64 + ')'}}>
+              style ={{'backgroundImage':'url(' + imageBase64 + ')'}}>
             </div>
 
             {this.renderSpinningCircle()}
@@ -224,6 +225,3 @@ function getCroppedImg(image, pixelCrop, fileName) {
     }, 'image/jpeg');
   });
 }
-
-
-

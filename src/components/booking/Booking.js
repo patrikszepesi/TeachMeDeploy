@@ -1,12 +1,14 @@
+
 import React from 'react';
-import DateRangePicker from 'react-bootstrap-daterangepicker';
+//import DateRangePicker from 'react-bootstrap-daterangepicker';
 import { toast } from 'react-toastify';
 import { BookingModal } from './BookingModal';
-import { getRangeOfDates } from 'helpers';
+//import { getRangeOfDates } from 'helpers';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+//import { BwmTextArea } from 'components/shared/form/BwmTextArea';
 
-import * as moment from 'moment';
+//import * as moment from 'moment';
 import * as actions from 'actions';
 
 class Booking extends React.Component {
@@ -19,9 +21,14 @@ class Booking extends React.Component {
 
     this.state = {
       proposedBooking: {
-        startAt: '',
-        endAt: '',
-        guests: ''
+        //startAt: '',
+        //endAt: '',
+        guests: '',
+        time:'',
+        usrContact:'',
+        about:'',
+        what:'',
+        when:'',
       },
       modal: {
         open: false
@@ -29,14 +36,14 @@ class Booking extends React.Component {
       errors: []
     }
 
-    this.checkInvalidDates = this.checkInvalidDates.bind(this);
-    this.handleApply = this.handleApply.bind(this);
+    //this.checkInvalidDates = this.checkInvalidDates.bind(this);
+    //this.handleApply = this.handleApply.bind(this);
     this.cancelConfirmation = this.cancelConfirmation.bind(this);
     this.reserveRental = this.reserveRental.bind(this);
   }
 
 
-  componentWillMount() {
+  /*componentWillMount() {
     this.getBookedOutDates();
   }
 
@@ -45,36 +52,79 @@ class Booking extends React.Component {
 
     if (bookings && bookings.length > 0) {
       bookings.forEach(booking => {
-        const dateRange = getRangeOfDates(booking.startAt, booking.endAt, 'Y/MM/DD');
+        const dateRange = getRangeOfDates(booking.startAt, /*booking.endAt, 'Y/MM/DD');
         this.bookedOutDates.push(...dateRange);
       });
     }
-  }
+  }*/
 
-  checkInvalidDates(date) {
+  /*checkInvalidDates(date) {
     return this.bookedOutDates.includes(date.format('Y/MM/DD')) || date.diff(moment(), 'days') < 0;
-  }
+  }*/
 
-  handleApply(event, picker) {
-    const startAt = picker.startDate.format('Y/MM/DD');
-    const endAt = picker.endDate.format('Y/MM/DD');
+  /*handleApply(event, picker) {
+    //const startAt = picker.startDate.format('Y/MM/DD');
+    //const endAt = picker.endDate.format('Y/MM/DD');
 
-    this.dateRef.current.value = startAt + ' to ' + endAt;
+    this.dateRef.current.value = startAt;
 
     this.setState({
       proposedBooking: {
         ...this.state.proposedBooking,
         startAt,
-        endAt
+        //endAt
       }
     });
-  }
+  }*/
 
-  selectGuests(event) {
+  handleWhen(event) {
     this.setState({
       proposedBooking: {
         ...this.state.proposedBooking,
-        guests: parseInt(event.target.value, 10)
+        when:event.target.value
+      }
+    })
+  }
+
+  handleGuests(event) {
+    this.setState({
+      proposedBooking: {
+        ...this.state.proposedBooking,
+        guests:event.target.value
+      }
+    })
+  }
+
+  handleTime(event) {
+    this.setState({
+      proposedBooking: {
+        ...this.state.proposedBooking,
+        time:event.target.value
+      }
+    })
+  }
+  handleusrContact(event) {
+    this.setState({
+      proposedBooking: {
+        ...this.state.proposedBooking,
+        usrContact:event.target.value
+      }
+    })
+  }
+
+  handleAbout(event) {
+    this.setState({
+      proposedBooking: {
+        ...this.state.proposedBooking,
+        about:event.target.value
+      }
+    })
+  }
+  handleWhat(event) {
+    this.setState({
+      proposedBooking: {
+        ...this.state.proposedBooking,
+        what:event.target.value
       }
     })
   }
@@ -87,27 +137,27 @@ class Booking extends React.Component {
     })
   }
 
-  addNewBookedOutDates(booking) {
+  /*addNewBookedOutDates(booking) {
     const dateRange = getRangeOfDates(booking.startAt, booking.endAt);
     this.bookedOutDates.push(...dateRange);
-  }
+  }*/
 
   resetData() {
-    this.dateRef.current.value = '';
+    //this.dateRef.current.value = '';
 
-    this.setState({proposedBooking: {guests: ''}});
+    this.setState({proposedBooking: {guests: '',time:'',usrContact:'',about:'',what:'',when:''}});
   }
 
   confirmProposedData() {
-    const {startAt, endAt} = this.state.proposedBooking;
-    const days = getRangeOfDates(startAt, endAt).length - 1;
+    //const {startAt, endAt} = this.state.proposedBooking;
+    //const days = getRangeOfDates(startAt, endAt).length - 1;
     const { rental } = this.props;
 
     this.setState({
       proposedBooking: {
         ...this.state.proposedBooking,
-        days,
-        totalPrice: days * rental.dailyRate,
+        //days,
+        //totalPrice: days * rental.dailyRate,
         rental
       },
       modal: {
@@ -119,10 +169,10 @@ class Booking extends React.Component {
   reserveRental() {
     actions.createBooking(this.state.proposedBooking).then(
       (booking) => {
-        this.addNewBookedOutDates(booking);
+        //this.addNewBookedOutDates(booking);
         this.cancelConfirmation();
-        this.resetData();
-        toast.success('Booking has been succesfuly created! Enjoy.');
+        //this.resetData();
+        toast.success('Sikeres Előfoglalás');
       },
       (errors) => {
         this.setState({errors});
@@ -131,47 +181,95 @@ class Booking extends React.Component {
 
   render() {
     const { rental, auth: { isAuth } } = this.props;
-    const { startAt, endAt, guests } = this.state.proposedBooking;
+    const { /*startAt, endAt,*/ guests,time,usrContact,about,what,when } = this.state.proposedBooking;
 
     return (
       <div className='booking'>
-        <h3 className='booking-price'>$ {rental.dailyRate} <span className='booking-per-night'>per night</span></h3>
+        <h3 className='booking-price'> Gyors Foglaló </h3>
+          <h9 > Figyelem! Nem mindegyik Oktató használja a Gyors Foglalót </h9>
         <hr></hr>
         { !isAuth &&
-          <Link className='btn btn-bwm btn-confirm btn-block' to={{pathname: '/login'}}>
-            Login to book place.
-          </Link>
+          <Link className='btn btn-bwm btn-confirm btn-block ' to={{pathname: '/login'}}>
+            Foglalas és Értékelésekhez Kattins
+            </Link>
         }
         { isAuth &&
           <React.Fragment>
+          <div className='form-group'>
+            <label htmlFor='when'>Melyik Nap mennél</label>
+            <input onChange={(event) => { this.handleWhen(event)}}
+                   value={when}
+                   type='text'
+                   className='form-control'
+                   id='when'
+                   aria-describedby='guests'
+                   placeholder='pl. Január 13'>
+            </input>
+          </div>
+
             <div className='form-group'>
-            <label htmlFor='dates'>Dates</label>
-            <DateRangePicker onApply={this.handleApply}
-                             isInvalidDate={this.checkInvalidDates}
-                             opens='left'
-                             containerStyles={{display: 'block'}}>
-              <input ref={this.dateRef} id='dates' type='text' className='form-control'></input>
-            </DateRangePicker>
-            </div>
-            <div className='form-group'>
-              <label htmlFor='guests'>Guests</label>
-              <input onChange={(event) => { this.selectGuests(event)}}
+              <label htmlFor='guests'>Teljes Neved</label>
+              <input onChange={(event) => { this.handleGuests(event)}}
                      value={guests}
-                     type='number'
+                     type='text'
                      className='form-control'
                      id='guests'
                      aria-describedby='guests'
                      placeholder=''>
               </input>
             </div>
-            <button disabled={!startAt || !endAt || !guests} onClick={() => this.confirmProposedData()} className='btn btn-bwm btn-confirm btn-block'>Reserve place now</button>
+            <div className='form-group'>
+              <label htmlFor='time'>Időpont</label>
+              <input onChange={(event) => { this.handleTime(event)}}
+                     value={time}
+                     type='text'
+                     className='form-control'
+                     id='time'
+                     //aria-describedby='guests'
+                     placeholder='pl. 16:00-18:00'>
+              </input>
+            </div>
+            <div className='form-group'>
+              <label htmlFor='usrContact'>Elérhetőséged</label>
+              <input onChange={(event) => { this.handleusrContact(event)}}
+                     value={usrContact}
+                     type='text'
+                     className='form-control'
+                     id='usrContact'
+                     //aria-describedby='guests'
+                     placeholder='Emailcímed vagy Telefonszámod'>
+              </input>
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='about'>Adatok az Oktatónak</label>
+              <input onChange={(event) => { this.handleAbout(event)}}
+              value={about}
+              type='text'
+              className='form-control'
+              id='about'
+              //aria-describedby='guests'
+              placeholder='Hol Tanulsz, Szakod(ha van)'>
+
+              </input>
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='what'>Miből kéne Felkészülnöd</label>
+              <input onChange={(event) => { this.handleWhat(event)}}
+              value={what}
+              type='text'
+              className='form-control'
+              id='what'
+              //aria-describedby='guests'
+              placeholder='pl.Függvényanalízis, Integrálás, stb.'>
+
+              </input>
+            </div>
+            <button disabled={ !guests || !time ||!when || !usrContact || !what} onClick={() => this.confirmProposedData()} className='btn btn-bwm btn-confirm btn-block'>Foglalj Időpontot</button>
           </React.Fragment>
         }
-        <hr></hr>
-        <p className='booking-note-title'>People are interested into this house</p>
-        <p className='booking-note-text'>
-          More than 500 people checked this rental in last month.
-        </p>
+
         <BookingModal open={this.state.modal.open}
                       closeModal={this.cancelConfirmation}
                       confirmModal={this.reserveRental}
@@ -190,7 +288,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Booking)
-
-
-
-

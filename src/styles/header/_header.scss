@@ -12,7 +12,7 @@
     margin-right: 30px;
     font-size: 27px;
     letter-spacing: 1px;
-    color: $main-color !important;
+    color: $main-white-color !important;
     font-weight: 500;
 
     img {
@@ -26,13 +26,13 @@
   }
 
   .btn-bwm-search {
-    border-color: $main-color;
-    color: $main-color;
+    border-color: #C0C0C0	;
+    color: #C0C0C0	;
 
     &:hover, &:focus, &:active {
       background-color: transparent !important;
-      border-color: $main-color !important;
-      color: $main-color !important;
+      border-color: $main-white-color !important;
+      color: $main-white-color !important;
       box-shadow: none;
     }
   }
@@ -46,7 +46,7 @@
       font-size: 14px;
 
       &:active {
-        background-color: $main-color;
+        background-color: $main-white-color;
       }
     }
   }

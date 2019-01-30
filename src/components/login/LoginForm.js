@@ -11,7 +11,7 @@ const LoginForm = props => {
       <Field
         name="email"
         type="email"
-        label='Email'
+        placeholder='Email'
         className='form-control'
         component={BwmInput}
         validate={[required, minLength4]}
@@ -19,13 +19,13 @@ const LoginForm = props => {
       <Field
         name="password"
         type="password"
-        label='Password'
+        placeholder='Jelszó'
         className='form-control'
         component={BwmInput}
         validate={[required]}
       />
       <button className='btn btn-bwm btn-form' type="submit" disabled={!valid || pristine || submitting}>
-        Login
+        Bejelentkezés
       </button>
       <BwmResError errors={errors} />
     </form>

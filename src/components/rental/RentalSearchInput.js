@@ -30,11 +30,11 @@ class RentalSearchInput extends React.Component {
                ref={this.searchInput}
                className='form-control mr-sm-2 bwm-search'
                type='search'
-               placeholder='Try "New York"'
+               placeholder='Tantárgy Hivatalos neve'
                aria-label='Search'></input>
         <button onClick={() => {this.handleSearch()}}
                 className='btn btn-outline-success my-2 my-sm-0 btn-bwm-search'
-                type='submit'>Search</button>
+                type='submit'>Keresés</button>
       </div>
     )
   }

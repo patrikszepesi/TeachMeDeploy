@@ -10,33 +10,33 @@ const RegisterForm = props => {
       <Field
         name="username"
         type="text"
-        label='Username'
+        placeholder='Telejes Neved'
         className='form-control'
         component={BwmInput}
       />
       <Field
         name="email"
         type="email"
-        label='Email'
+        placeholder='Email'
         className='form-control'
         component={BwmInput}
       />
       <Field
         name="password"
         type="password"
-        label='Password'
+        placeholder='Jelszó'
         className='form-control'
         component={BwmInput}
       />
       <Field
         name="passwordConfirmation"
         type="password"
-        label='Password Confirmation'
+        placeholder='Jelszó újra'
         className='form-control'
         component={BwmInput}
       />
       <button className='btn btn-bwm btn-form' type="submit" disabled={!valid || pristine || submitting}>
-        Register
+        Regisztráció
       </button>
       <BwmResError errors={errors} />
     </form>

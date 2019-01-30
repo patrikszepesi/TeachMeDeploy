@@ -17,7 +17,8 @@ import { FETCH_RENTAL_BY_ID_SUCCESS,
          UPDATE_RENTAL_FAIL,
          RESET_RENTAL_ERRORS,
          RELOAD_MAP,
-         RELOAD_MAP_FINISH } from './types';
+         RELOAD_MAP_FINISH,
+         UPDATE_BOOKINGS } from './types';
 
 const axiosInstance = axiosService.getInstance();
 
@@ -89,10 +90,11 @@ export const fetchRentalById = (rentalId) => {
   return function(dispatch) {
     dispatch(fetchRentalByIdInit());
 
-    axios.get(`/api/v1/rentals/${rentalId}`)
+    return axios.get(`/api/v1/rentals/${rentalId}`)
       .then(res => res.data )
-      .then(rental => dispatch(fetchRentalByIdSuccess(rental))
-    );
+      .then(rental => {dispatch(fetchRentalByIdSuccess(rental));
+          return rental;
+      })
   }
 }
 
@@ -170,6 +172,13 @@ export const fetchUserBookings = () => {
 }
 
 // USER RENTALS ACTIONS ---------------------------
+
+export const updateBookings = (bookings) =>{
+  return{
+    type:UPDATE_BOOKINGS,
+    bookings
+  }
+}
 
 export const getUserRentals = () => {
   return axiosInstance.get('/rentals/manage').then(
@@ -258,14 +267,14 @@ export const uploadImage = image => {
     .catch(({response}) => Promise.reject(response.data.errors[0]))
 }
 
+export const createReview=(reviewData,bookingId)=>{
+  return axiosInstance.post(`/reviews?bookingId=${bookingId}`,reviewData)
+  .then(res=>res.data)
+  .catch(({response}) => Promise.reject(response.data.errors[0]))
+}
 
-
-
-
-
-
-
-
-
-
-
+export const getReviews=(rentalId)=>{
+  return axiosInstance.get(`/reviews?rentalId=${rentalId}`)
+  .then(res => res.data)
+  .catch(({response}) => Promise.reject(response.data.errors[0]))
+}

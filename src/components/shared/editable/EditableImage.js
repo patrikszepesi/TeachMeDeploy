@@ -26,7 +26,7 @@ export class EditableImage extends EditableComponent {
             <img src={value} alt=''/>
             <button onClick={() => this.enableEdit() }
                 className='btn btn-warning btn-editable btn-editable-image'
-                type='button'> Edit
+                type='button'> Szerkeszt
             </button>
           </React.Fragment>
         }
@@ -35,7 +35,7 @@ export class EditableImage extends EditableComponent {
           <React.Fragment>
             <button onClick={() => this.disableEdit() }
                   className='btn btn-warning btn-editable btn-editable-image'
-                  type='button'> Close
+                  type='button'> Mégse
             </button>
             <BwmFileUpload onChange={this.handleImageUpload}></BwmFileUpload>
           </React.Fragment>

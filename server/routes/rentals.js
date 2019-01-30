@@ -55,7 +55,7 @@ router.get('/:id', function(req, res) {
         .exec(function(err, foundRental) {
 
     if (err) {
-      return res.status(422).send({errors: [{title: 'Rental Error!', detail: 'Could not find Rental!'}]});
+      return res.status(422).send({errors: [{title: 'Rental Error!', detail: 'Nem találtuk a tanárt!'}]});
     }
 
     return res.json(foundRental);
@@ -77,7 +77,7 @@ router.patch('/:id', UserCtrl.authMiddleware, function(req, res) {
       }
 
       if (foundRental.user.id !== user.id) {
-        return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'You are not rental owner!'}]});
+        return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'You are not an owner!'}]});
       }
 
       foundRental.set(rentalData);
@@ -127,10 +127,10 @@ router.delete('/:id', UserCtrl.authMiddleware, function(req, res) {
 });
 
 router.post('', UserCtrl.authMiddleware, function(req, res) {
-  const { title, city, street, category, image, shared, bedrooms, description, dailyRate } = req.body;
+  const { title, city, street, category, image, shared, bedrooms, description, dailyRate,city2,name2,username,major,contact2,email,available,when,reserve } = req.body;
   const user = res.locals.user;
 
-  const rental = new Rental({title, city, street, category, image, shared, bedrooms, description, dailyRate});
+  const rental = new Rental({title, city, street, category, image,shared, bedrooms, description, dailyRate,city2,name2,username,major,contact2,email,available,when,reserve});
   rental.user = user;
 
   Rental.create(rental, function(err, newRental) {
@@ -157,7 +157,7 @@ router.get('', function(req, res) {
     }
 
     if (city && foundRentals.length === 0) {
-      return res.status(422).send({errors: [{title: 'No Rentals Found!', detail: `There are no rentals for city ${city}`}]});
+      return res.status(422).send({errors: [{title: 'No Rentals Found!', detail: `nincs ilyen oktató`}]});
     }
 
     return res.json(foundRentals);
@@ -165,4 +165,3 @@ router.get('', function(req, res) {
 });
 
 module.exports = router;
-
