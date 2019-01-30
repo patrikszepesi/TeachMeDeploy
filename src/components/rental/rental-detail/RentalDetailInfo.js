@@ -35,7 +35,11 @@ export function RentalDetailInfo(props) {
           <h1 className='rental-title'>Elérhetőségek</h1>
 
           <li>
-          <h7 className='rental-email'>Emailcím : {rental.email}</h7>
+          <h7 className='rental-email'> Emailcím : <a href={"mailto:" + rental.email}>{rental.email}</a></h7>
+
+
+
+
 
           </li>
               <li>

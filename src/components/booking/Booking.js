@@ -190,7 +190,7 @@ class Booking extends React.Component {
         <hr></hr>
         { !isAuth &&
           <Link className='btn btn-bwm btn-confirm btn-block ' to={{pathname: '/login'}}>
-            Foglalas és Értékelésekhez Kattins
+            Foglalás és Értékelésekhez Kattins
             </Link>
         }
         { isAuth &&

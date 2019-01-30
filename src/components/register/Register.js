@@ -37,7 +37,7 @@ export class Register extends React.Component {
           <div className='row'>
             <div className='col-md-5'>
               <h1>Regisztráció</h1>
-              <h6>Nem kell Tanárnak Lenned,hogy Oktass</h6>
+              <h6>Nem kell Tanárnak lenned,hogy Oktass</h6>
               <RegisterForm submitCb={this.registerUser} errors={errors} />
             </div>
             <div className='col-md-6 ml-auto'>
