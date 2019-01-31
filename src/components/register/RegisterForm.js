@@ -10,7 +10,7 @@ const RegisterForm = props => {
       <Field
         name="username"
         type="text"
-        placeholder='Telejes Neved'
+        placeholder='Teljes Neved'
         className='form-control'
         component={BwmInput}
       />
