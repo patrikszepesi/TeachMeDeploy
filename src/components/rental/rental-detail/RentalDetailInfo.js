@@ -7,8 +7,8 @@ export function RentalDetailInfo(props) {
 
   return (
       <div className='rental'>
-            <h6>Csak úgy tudod Értékelni az Oktatót ha használja a Gyors Foglalót</h6>
-            <h8>Az Értéklésekhez görgess az oldal aljára</h8>
+            <h6>Csak úgy tudod Értékelni az Oktatót ha a Gyors Foglalón keresztül foglalsz időpontot</h6>
+            <h8>Az Értéklések megtekintéséhez görgess az oldal aljára</h8>
               <hr/>
           <h2 className='rental-title'>{rental.name2}</h2>
           <h6 className='rental-category'>{toUpperCase(rental.city)} Oktató</h6>
@@ -29,7 +29,7 @@ export function RentalDetailInfo(props) {
         <h1 className='rental-contact'>{rental.contact}</h1>
         <div className='rental-room-info'>
 
-          <span><i className='fa fa-graduation-cap'></i> Elért Érdemjegy ebből a tárgyból : {rental.bedrooms } </span>
+          <span><i className='fa fa-graduation-cap'></i> Elért Érdemjegy ebből a tárgyból(ha van) : {rental.bedrooms } </span>
         </div>
         <p className='rental-description'>
           {rental.description}
