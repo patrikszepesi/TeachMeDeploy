@@ -23,9 +23,7 @@ function MapComponent(props) {
       {isLocationLoaded && isError &&
        <InfoWindow position={coordinates} options={{maxWidth: 300}}>
         <div>
-          Uuuuups, there is problem to find location on the map, we are trying to resolve
-          problem as fast as possible. Contact host for additional informations if you are
-          still interested in booking this place. We are sorry for incoviniance.
+        Hiba történt! Proóbálja meg újra, vagy tájékoztasson minket
         </div>
       </InfoWindow>}
     </GoogleMap>
@@ -116,5 +114,3 @@ function withGeocode(WrappedComponent) {
 }
 
 export const MapWithGeocode = withScriptjs(withGoogleMap(withGeocode(MapComponent)));
-
-

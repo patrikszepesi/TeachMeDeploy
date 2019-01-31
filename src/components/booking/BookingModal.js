@@ -17,9 +17,9 @@ export function BookingModal(props) {
       <p>Időpont <em>{booking.when}</em></p>
         <p><em>{booking.time}</em></p>
 
-        <p>A Foglalásodat a -Profile Kezelése-</p>
-      <p> majd az -Általad Foglalt Oktató- menüpont</p>
-      <p>alatt találod</p>
+        <p>A Foglalásodat a </p>
+      <p>Foglalásaid gombra kattintva</p>
+      <p>tudod megnézni.</p>
         <p>Az óra után szintén ott tudod</p>
         <p>Értékelni az Oktatódat</p>
     </div>

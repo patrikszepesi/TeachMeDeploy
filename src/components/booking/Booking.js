@@ -189,8 +189,11 @@ class Booking extends React.Component {
           <h9 > Figyelem! Nem mindegyik Oktató használja a Gyors Foglalót </h9>
         <hr></hr>
         { !isAuth &&
+
           <Link className='btn btn-bwm btn-confirm btn-block ' to={{pathname: '/login'}}>
-            Foglalás és Értékelésekhez Kattins
+          <p>Értékelések megtekintéséhez</p>
+          <p>és Foglaláshoz</p>
+          <p>Kattins Ide</p>
             </Link>
         }
         { isAuth &&

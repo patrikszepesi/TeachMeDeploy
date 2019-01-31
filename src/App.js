@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import { ToastContainer } from 'react-toastify';
 import Header from 'components/shared/Header';
+import Footer from 'components/shared/Footer';
 import RentalListing from 'components/rental/rental-listing/RentalListing';
 import RentalSearchListing from 'components/rental/rental-listing/RentalSearchListing';
 import RentalDetail from 'components/rental/rental-detail/RentalDetail';
@@ -49,6 +50,7 @@ class App extends Component {
           <ToastContainer />
           <Header logout={this.logout}/>
           <div className='container'>
+
             <Switch>
               <Route exact path='/' render={() =>  <Redirect to='/rentals' /> }/>
               <Route exact path='/rentals' component={RentalListing} />
@@ -63,6 +65,7 @@ class App extends Component {
               <Route exact path='/help' component={Help} />
               <LoggedInRoute exact path='/register' component={Register} />
             </Switch>
+              <Footer/>
           </div>
         </div>
         </BrowserRouter>

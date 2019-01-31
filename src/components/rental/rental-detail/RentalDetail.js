@@ -62,7 +62,7 @@ export class RentalDetail extends React.Component {
             {reviews && reviews.length>0 &&
                             <div className="row">
                   <div className="col-md-8">
-                    <section style={{marginTop: '-200px'}}>
+                    <section style={{marginTop: '0px'}}>
 
                       <h2>Értékelések</h2>
 
