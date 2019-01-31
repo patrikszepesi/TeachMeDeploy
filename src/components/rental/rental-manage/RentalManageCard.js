@@ -37,7 +37,7 @@ export class RentalManageCard extends React.Component {
 
     const deleteClass = wantDelete ? 'toBeDeleted' : '';
     if(rental.bookings.length!==0){
-  alert( 'A(z) ' + rental.city.toUpperCase()+ ' órádra eddig összesen ' + rental.bookings.length + ' foglalás érkezett. Kattins az ok gombora, hogy megnézd őket')}
+  alert( 'A(z) ' + rental.city.toUpperCase()+ ' órádra eddig összesen ' + rental.bookings.length + ' foglalás érkezett. Nézd meg őket')}
 
 
 
