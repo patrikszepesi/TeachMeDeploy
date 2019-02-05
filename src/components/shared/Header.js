@@ -50,7 +50,9 @@ class Header extends React.Component {
     return (
       <nav className='navbar navbar-dark navbar-expand-lg'>
         <div className='container'>
+      
           <Link className='navbar-brand' to='/rentals'>YouTeach
+
 
           </Link>
           <RentalSearchInput />
