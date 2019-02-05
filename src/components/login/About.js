@@ -26,7 +26,7 @@ class About extends React.Component {
               <p>A story röviden annyi, hogy én magam sokszor nem találom meg a közös pontot a tanáraimmal és rengetegszer volt már olyan, hogy egy másik hallgató társam jobban el tudta nekem magyarázni a tananyagot mint a tanár. Innen jött az ötlet, hogy csináljak egy weboldalt ahol bárki taníthat bárkit és majd az értékelések segítségével csak a jó mínőségű oktatók maradnak. Csapatunkat kettő Corvinuson tanuló Pénzügy Számvitel szakos hallgató alkotja. Szepesi Patrik aki előállt az ötlettel és elkészítette a weboldalt valamint a későbbiekben hozzá csatlakozó Palkó Péter aki tagja a HÖK-nek. </p>
             <span>Ha kérdésed van, hogy hogyan működik az oldal akkor regisztrálj és a segítség menüpontban mindent megtalálsz. </span>
 
-            <span>Vagy ha Egyéb kérdésed van akkor kattins  <a href= {"mailto: teachme.helpnow@gmail.com "}> ide. </a></span>
+            <span>Vagy ha Egyéb kérdésed van akkor kattins  <a href= {"mailto: youteach.help@gmail.com "}> ide. </a></span>
 
 
             </div>

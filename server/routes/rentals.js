@@ -127,10 +127,10 @@ router.delete('/:id', UserCtrl.authMiddleware, function(req, res) {
 });
 
 router.post('', UserCtrl.authMiddleware, function(req, res) {
-  const { title, city, street, category, image, shared, bedrooms, description, dailyRate,city2,name2,username,major,contact2,email,available,when,reserve } = req.body;
+  const { title, city, street, category, image, shared, bedrooms, description, dailyRate,city2,name2,username,major,contact2,email,available,when,reserve,role } = req.body;
   const user = res.locals.user;
 
-  const rental = new Rental({title, city, street, category, image,shared, bedrooms, description, dailyRate,city2,name2,username,major,contact2,email,available,when,reserve});
+  const rental = new Rental({title, city, street, category, image,shared, bedrooms, description, dailyRate,city2,name2,username,major,contact2,email,available,when,reserve,role});
   rental.user = user;
 
   Rental.create(rental, function(err, newRental) {

@@ -5,7 +5,7 @@ import Booking from 'components/booking/Booking';
 
 import { UserGuard } from '../../shared/auth/UserGuard';
 //import { RentalAssets } from './RentalAssets';
-import { toUpperCase } from 'helpers';
+//import { toUpperCase } from 'helpers';
 
 import { EditableInput } from '../../shared/editable/EditableInput';
 import { EditableText } from '../../shared/editable/EditableText';
@@ -120,13 +120,7 @@ class RentalUpdate extends React.Component {
                                    errors={errors}
                                    resetErrors={this.resetRentalErrors}  />
 
-                    <EditableInput entity={rental}
-                                   entityField={'city'}
-                                   className={'rental-city'}
-                                   updateEntity={this.updateRental}
-                                   errors={errors}
-                                   formatPipe={[toUpperCase]}
-                                   resetErrors={this.resetRentalErrors} />
+
                     <EditableInput entity={rental}
                                    entityField={'city2'}
                                    updateEntity={this.updateRental}

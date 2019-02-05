@@ -14,8 +14,8 @@ class RentalListing extends React.Component {
   render() {
     return (
       <section id="rentalListing">
-        <h1 className="page-title">Regisztrálj ha Oktatnál vagy épp Oktatót Keresel</h1>
-          <h5>Nem kell Tanárnak lenned, hogy Taníts</h5>
+        <h1 className="page-title">Nem kell Tanárnak lenned, hogy Taníts!</h1>
+          <h5>Nincs díj, Nincs költség, csak Csatlakozz és Oktass vagy Keress Oktatót</h5>
           <hr/>
         <RentalList rentals={this.props.rentals} />
       </section>

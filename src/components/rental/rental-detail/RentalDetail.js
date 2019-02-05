@@ -72,7 +72,7 @@ export class RentalDetail extends React.Component {
                           <div className="row">
                             <div className="col-md-2 user-image">
                                 <img src="https://image.ibb.co/jw55Ex/def_face.jpg" className="img img-rounded img-fluid" alt=""/>
-                                <p className="text-secondary text-center">{pretifyDate(rental.createdAt)}</p>
+                                <p className="text-secondary text-center">{pretifyDate(review.createdAt)}</p>
                             </div>
 
                             <div className="col-md-10">

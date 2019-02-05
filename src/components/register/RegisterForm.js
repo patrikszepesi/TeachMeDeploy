@@ -2,9 +2,10 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { BwmInput } from 'components/shared/form/BwmInput';
 import { BwmResError } from 'components/shared/form/BwmResError';
+import { BwmSelect } from 'components/shared/form/BwmSelect';
 
 const RegisterForm = props => {
-  const { handleSubmit, pristine, submitting, submitCb, valid, errors } = props
+  const { handleSubmit, pristine, submitting, submitCb, valid, errors,options } = props
   return (
     <form onSubmit={handleSubmit(submitCb)}>
       <Field
@@ -35,6 +36,15 @@ const RegisterForm = props => {
         className='form-control'
         component={BwmInput}
       />
+
+      <Field
+        options={options}
+        name="role"
+        label='Jelenlegi Státuszod'
+        className='form-control'
+        component={BwmSelect}
+      />
+
       <button className='btn btn-bwm btn-form' type="submit" disabled={!valid || pristine || submitting}>
         Regisztráció
       </button>
@@ -47,19 +57,19 @@ const validate = values => {
   const errors = {};
 
   if (values.username && values.username.length < 4) {
-    errors.username = 'Username min length is 4 characters!';
+    errors.username = 'Teljes Név minimum 4 karakter kell, hogy legyen!';
   }
 
   if (!values.email) {
-    errors.email = 'Please enter email!';
+    errors.email = 'Az email kötelező!';
   }
 
   if (!values.passwordConfirmation) {
-    errors.passwordConfirmation = 'Please enter password confirmation!';
+    errors.passwordConfirmation = 'Írd be a Jelszót újra!';
   }
 
   if (values.password !== values.passwordConfirmation) {
-    errors.password = 'Passwords must be the same';
+    errors.password = 'A Jelszónak egyeznie kell';
   }
 
   return errors;

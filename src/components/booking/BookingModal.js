@@ -22,6 +22,8 @@ export function BookingModal(props) {
       <p>tudod megnézni.</p>
         <p>Az óra után szintén ott tudod</p>
         <p>Értékelni az Oktatódat</p>
+          <p>Az Oktató hamar vissza fog jelezni neked,</p>
+          <p>hogy tudsz-e menni a kívánt időpontban</p>
     </div>
     <BwmResError errors={errors} />
     <div className='modal-footer'>

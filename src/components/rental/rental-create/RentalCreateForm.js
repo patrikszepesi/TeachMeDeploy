@@ -7,7 +7,7 @@ import { BwmSelect } from 'components/shared/form/BwmSelect';
 import { BwmTextArea } from 'components/shared/form/BwmTextArea';
 import { BwmFileUpload } from 'components/shared/form/BwmFileUpload';
 import { BwmResError } from 'components/shared/form/BwmResError';
-// import { required, minLength4 } from 'components/shared/form/validators';
+// import { required, minLength4 } from 'components/shared/form/validators';d
 
 const RentalCreateForm = props => {
   const { handleSubmit, pristine, submitting, submitCb, valid, options, errors } = props
@@ -24,7 +24,7 @@ const RentalCreateForm = props => {
     <Field
       name="shared"
       type="checkbox"
-      label='Pipáld be ha ez egy Csoportos óra(NEM egyéni) '
+      label='Pipáld be ha ez egy Csoportos óra(Több mint egy diákot tanítasz egy órában) '
       className='form-control'
       component={BwmInput}
     />

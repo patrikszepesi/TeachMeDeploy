@@ -1,6 +1,7 @@
 import React from 'react';
 import RentalCreateForm from './RentalCreateForm';
 import { Redirect } from 'react-router-dom';
+//
 
 import * as actions from 'actions';
 

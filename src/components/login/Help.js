@@ -23,7 +23,7 @@ class About extends React.Component {
           <div className="row">
             <div className="col-md-6">
               <h1>Kérdések és Hibajelentés</h1>
-              <h5> Kérdés vagy Hibajelentés esetén írj <a href= {"mailto: teachme.helpnow@gmail.com "}> nekünk </a></h5>
+              <h5> Kérdés vagy Hibajelentés esetén írj <a href= {"mailto: youteach.help@gmail.com "}> nekünk </a></h5>
 
                 <li>Kiből lehet Oktató?</li>
                 <span>VÁLASZ: Bárki lehet Oktató. Az Értékelések majd úgyis kiszűrik a rossz Oktatókat</span>

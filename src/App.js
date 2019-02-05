@@ -14,6 +14,7 @@ import { RentalCreate } from 'components/rental/rental-create/RentalCreate';
 import Login from 'components/login/Login';
 import About from 'components/login/About';
 import Help from 'components/login/Help';
+
 import { Register } from 'components/register/Register';
 
 import { RentalManage } from 'components/rental/rental-manage/RentalManage';

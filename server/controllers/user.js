@@ -33,7 +33,7 @@ exports.auth =  function(req, res) {
 }
 
 exports.register =  function(req, res) {
-  const { username, email, password, passwordConfirmation } = req.body;
+  const { username, email, password, passwordConfirmation,role } = req.body;
 
   if (!password || !email) {
     return res.status(422).send({errors: [{title: 'Data missing!', detail: 'Email és Jelszó megadása kötelező'}]});
@@ -55,7 +55,8 @@ exports.register =  function(req, res) {
     const user = new User({
       username,
       email,
-      password
+      password,
+      role
     });
 
     user.save(function(err) {
