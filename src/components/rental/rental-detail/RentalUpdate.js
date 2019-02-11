@@ -161,17 +161,7 @@ class RentalUpdate extends React.Component {
 
 
 
-                    <div className='rental-room-info'>
-
-                        <EditableInput entity={rental}
-                                   entityField={'bedrooms'}
-                                   className={'rental-bedrooms'}
-                                   containerStyle={{'display': 'inline-block'}}
-                                   updateEntity={this.updateRental}
-                                   errors={errors}
-                                   resetErrors={this.resetRentalErrors}  />
-
-                    </div>
+                    
                     <EditableText  entity={rental}
                                    entityField={'description'}
                                    className={'rental-description'}

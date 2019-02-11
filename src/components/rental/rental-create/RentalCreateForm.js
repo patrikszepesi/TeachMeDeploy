@@ -82,15 +82,7 @@ const RentalCreateForm = props => {
        label='Image'
        component={BwmFileUpload}
      />
-     <Field
 
-       name="bedrooms"
-       type="text"
-       label='Jegyed ebből a Tárgyból(nem Kötelező)'
-       placeholder="pl. Jeles"
-       className='form-control'
-       component={BwmInput}
-     />
      <Field
 
        name="major"
@@ -137,7 +129,7 @@ const RentalCreateForm = props => {
      <Field
        name="reserve"
        type="checkbox"
-       label='Pipald be ha használod a Gyors Foglalót. Ammenyiben használod, a Tantárgyaid menüre kell rámenned, hogy lásd a beérkező foglalásokat. A diákok csak akkor tudnak értékelést írni rólad ha használod a Gyors Foglalót'
+       label='Pipald be ha használod a Gyors Foglalót. Ammenyiben használod, a Tantárgyaid menüre kell rámenned, hogy lásd a beérkező foglalásokat. A diákok csak akkor tudnak értékelést írni rólad ha használod a Gyors Foglalót. A Profilodat sokkal többen fogják megnézni ha használod a Gyors Foglalót '
        className='form-control'
        component={BwmInput}
      />

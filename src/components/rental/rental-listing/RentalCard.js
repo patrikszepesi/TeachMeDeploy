@@ -15,7 +15,7 @@ export function RentalCard(props) {
           <img className='card-img-top' src={rental.image} alt={rental.title}></img>
           <div className='card-block'>
             <h6 className={`card-subtitle ${rental.category}`}> {rental.category} &#183; {rental.title} &#183;</h6>
-              <h4 className='card-title'>{rental.city.toUpperCase()} Oktató</h4>
+              <h4 className='card-title'> Tantárgy: { rental.city.toUpperCase()}</h4>
                 <h4 className='card-title'>{rental.name2}</h4>
 
 
