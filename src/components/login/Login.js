@@ -30,6 +30,7 @@ class Login extends React.Component {
           <div className="row">
             <div className="col-md-5">
               <h1>Bejelentkezés</h1>
+                <h6>Lépj be és Taníts vagy Keress Oktatót.</h6>
               {
                 successRegister &&
                   <div className='alert alert-success'>
@@ -40,8 +41,9 @@ class Login extends React.Component {
             </div>
             <div className="col-md-6 ml-auto">
               <div className="image-container">
-                <h2 className="catchphrase">Lépj be és Taníts vagy Keress Oktatót.</h2>
-                <img src={process.env.PUBLIC_URL + '/img/class4.jpg'} alt=""/>
+
+                <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
+
               </div>
             </div>
           </div>

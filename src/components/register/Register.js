@@ -47,9 +47,9 @@ export class Register extends React.Component {
             <div className='col-md-6 ml-auto'>
               <div className='image-container'>
 
-                <h2 className='catchphrase'>Regisztrálj és Taníts vagy Tanulj </h2>
+                <h2 >Regisztrálj és Taníts vagy Tanulj </h2>
 
-                <img src={process.env.PUBLIC_URL + '/img/class5.jpg'} alt=""/>
+                <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
               </div>
             </div>
           </div>
