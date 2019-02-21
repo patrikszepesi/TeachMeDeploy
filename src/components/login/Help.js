@@ -58,6 +58,8 @@ class About extends React.Component {
 
                 <img src={process.env.PUBLIC_URL + '/img/class6.jpg'} alt=""/>
 
+                  <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
+
                   </div>
 
 
