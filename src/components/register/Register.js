@@ -43,7 +43,7 @@ export class Register extends React.Component {
 
 
 
-              <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
+
             </div>
           </div>
             <div className='col-md-15'>
@@ -53,7 +53,14 @@ export class Register extends React.Component {
                 <h6>Mi sem a Diáktól sem az Oktatótol nem kérünk egy Forintot sem</h6>
               <RegisterForm submitCb={this.registerUser} errors={errors} options={this.role} />
             </div>
-          
+            <div className='col-md-6 ml-auto'>
+              <div className='image-container'>
+
+    <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
+
+
+              </div>
+            </div>
           </div>
         </div>
       </section>

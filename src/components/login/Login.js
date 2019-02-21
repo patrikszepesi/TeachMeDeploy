@@ -31,7 +31,7 @@ class Login extends React.Component {
           <div className="col-md-10 ml-auto">
             <div className="image-container">
 
-              <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
+
 
             </div>
           </div>
@@ -49,7 +49,7 @@ class Login extends React.Component {
             <div className="col-md-6 ml-auto">
               <div className="image-container">
 
-
+            <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
               </div>
             </div>
           </div>

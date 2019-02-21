@@ -56,7 +56,7 @@ const RentalCreateForm = props => {
        type="text"
        label='Magadról'
        rows='6'
-       placeholder="Tapasztalaid a tárgyal, stb."
+       placeholder="Tapasztalataid a tárggyal, stb."
        className='form-control'
        component={BwmTextArea}
      />
