@@ -53,14 +53,7 @@ export class Register extends React.Component {
                 <h6>Mi sem a Diáktól sem az Oktatótol nem kérünk egy Forintot sem</h6>
               <RegisterForm submitCb={this.registerUser} errors={errors} options={this.role} />
             </div>
-            <div className='col-md-6 ml-auto'>
-              <div className='image-container'>
-
-
-
-
-              </div>
-            </div>
+          
           </div>
         </div>
       </section>
