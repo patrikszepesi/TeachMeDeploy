@@ -37,20 +37,32 @@ export class RentalCreate extends React.Component {
       <section id='newRental'>
         <div className='bwm-form'>
           <div className='row'>
-            <div className='col-md-5'>
-              <h1 className='page-title'>Legyél te is Oktató</h1>
+
+          <div className='col-md-6 ml-auto'>
+            <div className='image-container'>
+
+
+              <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=''/>
+                <h1 className='page-title'>Legyél te is Oktató</h1>
               <h6>Több tárgyat is oktathatsz de egyesével készítsd el a Profilt a különböző tárgyakhoz</h6>
                 <h6>Ügyelj arra, hogy a tantárgyad nevét pontosan írd ki pl.(Opkut helyett Írd, hogy Operációkutatás)</h6>
-              <RentalCreateForm submitCb={this.createRental}
-                                options={this.rentalCateogies}
+                <div className='col-md-15'>
 
-                                errors={this.state.errors}/>
+
+                  <RentalCreateForm submitCb={this.createRental}
+                                    options={this.rentalCateogies}
+
+                                    errors={this.state.errors}/>
+                </div>
+
             </div>
+          </div>
+
             <div className='col-md-6 ml-auto'>
               <div className='image-container'>
-              
 
-                <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=''/>
+
+
 
               </div>
             </div>

@@ -38,18 +38,27 @@ export class Register extends React.Component {
       <section id='register'>
         <div className='bwm-form'>
           <div className='row'>
-            <div className='col-md-5'>
+          <div className='col-md-10 ml-auto'>
+            <div className='image-container'>
+
+
+
+              <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
+            </div>
+          </div>
+            <div className='col-md-15'>
+
               <h1>Regisztráció</h1>
-              <h6>Nem kell tanárnak lenned,hogy taníts!</h6>
-                <h6>A használat INGYENES minden felhasználó részére</h6>
+              <h6>Nem kell Tanárnak lenned,hogy Oktass!</h6>
+                <h6>Mi sem a Diáktól sem az Oktatótol nem kérünk egy Forintot sem</h6>
               <RegisterForm submitCb={this.registerUser} errors={errors} options={this.role} />
             </div>
             <div className='col-md-6 ml-auto'>
               <div className='image-container'>
 
-                <h2 >Regisztrálj és Taníts vagy Tanulj </h2>
 
-                <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
+
+
               </div>
             </div>
           </div>

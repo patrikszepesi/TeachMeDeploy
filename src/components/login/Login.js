@@ -28,6 +28,13 @@ class Login extends React.Component {
       <section id="login">
         <div className="bwm-form">
           <div className="row">
+          <div className="col-md-10 ml-auto">
+            <div className="image-container">
+
+              <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
+
+            </div>
+          </div>
             <div className="col-md-5">
               <h1>Bejelentkezés</h1>
                 <h6>Lépj be és Taníts vagy Keress Oktatót.</h6>
@@ -42,7 +49,6 @@ class Login extends React.Component {
             <div className="col-md-6 ml-auto">
               <div className="image-container">
 
-                <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=""/>
 
               </div>
             </div>
