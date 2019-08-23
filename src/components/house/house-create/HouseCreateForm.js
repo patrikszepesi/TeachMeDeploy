@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { BwmInput } from 'components/shared/form/BwmInput';
@@ -9,18 +8,11 @@ import { BwmFileUpload } from 'components/shared/form/BwmFileUpload';
 import { BwmResError } from 'components/shared/form/BwmResError';
 // import { required, minLength4 } from 'components/shared/form/validators';d
 
-const RentalCreateForm = props => {
+const HouseCreateForm = props => {
   const { handleSubmit, pristine, submitting, submitCb, valid, options, errors } = props
   return (
     <form onSubmit={handleSubmit(submitCb)}>
-    <Field
-      name="name2"
-      type="text"
-      label='Teljes neved'
-      placeholder="Szóközzel"
-      className='form-control'
-      component={BwmInput}
-    />
+
     <Field
       name="shared"
       type="checkbox"
@@ -143,6 +135,6 @@ const RentalCreateForm = props => {
  }
 
  export default reduxForm({
- form: 'rentalCreateForm',
+ form: 'houseCreateForm',
  initialValues: { shared: false, category:'Másodéves Hallgató',reserve:false}
- })(RentalCreateForm)
+ })(HouseCreateForm)

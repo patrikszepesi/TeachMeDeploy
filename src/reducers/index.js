@@ -2,14 +2,16 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 
 import { rentalReducer, selectedRentalReducer } from './rental-reducer';
+import { houseReducer, selectedHouseReducer} from './house-reducer';
 import { authReducer } from './auth-reducer';
 import { rentalMapReducer } from './map-reducer';
 import { userBookingsReducer } from './booking-reducer';
 import { reducer as formReducer } from 'redux-form';
 
 export const init = () => {
-  const reducer = combineReducers({
+  const reducer = combineReducers({//its when you have multiple reducers
     rentals: rentalReducer,
+    houses: houseReducer,
     rental: selectedRentalReducer,
     form: formReducer,
     auth: authReducer,

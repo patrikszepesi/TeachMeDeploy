@@ -18,7 +18,7 @@ const userSchema = new Schema({
     max: [32, 'Too long, max is 32 characters'],
     unique: true,
     lowercase: true,
-    required: 'Email is required',
+    required: 'Email kötelező',
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/]
   },
   password: {
@@ -27,8 +27,10 @@ const userSchema = new Schema({
     max: [32, 'Too long, max is 32 characters'],
     required: 'Password is required'
   },
+  houses: [{type: Schema.Types.ObjectId, ref: 'House'}],
   rentals: [{type: Schema.Types.ObjectId, ref: 'Rental'}],
-  bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }]
+  bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }],
+  bookingsH: [{ type: Schema.Types.ObjectId, ref: 'BookingH' }]
 });
 
 userSchema.methods.hasSamePassword = function(requestedPassword) {

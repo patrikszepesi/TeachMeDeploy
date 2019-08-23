@@ -3,27 +3,43 @@ import authService from 'services/auth-service';
 import axiosService from 'services/axios-service';
 
 import { FETCH_RENTAL_BY_ID_SUCCESS,
+        FETCH_HOUSE_BY_ID_SUCCESS,
          FETCH_RENTAL_BY_ID_INIT,
+         FETCH_HOUSE_BY_ID_INIT,
          FETCH_RENTALS_SUCCESS,
+         FETCH_HOUSES_SUCCESS,
          FETCH_RENTALS_INIT,
+         FETCH_HOUSES_INIT,
          FETCH_RENTALS_FAIL,
+         FETCH_HOUSES_FAIL,
          LOGIN_SUCCESS,
          LOGIN_FAILURE,
          LOGOUT,
          FETCH_USER_BOOKINGS_SUCCESS,
+         FETCH_USER_HOUSE_BOOKINGS_SUCCESS,
          FETCH_USER_BOOKINGS_FAIL,
+         FETCH_USER_HOUSE_BOOKINGS_FAIL,
          FETCH_USER_BOOKINGS_INIT,
+         FETCH_USER_HOUSE_BOOKINGS_INIT,
          UPDATE_RENTAL_SUCCESS,
+         UPDATE_HOUSE_SUCCESS,
          UPDATE_RENTAL_FAIL,
+         UPDATE_HOUSE_FAIL,
          RESET_RENTAL_ERRORS,
+         RESET_HOUSE_ERRORS,
          RELOAD_MAP,
          RELOAD_MAP_FINISH,
-         UPDATE_BOOKINGS } from './types';
+         UPDATE_BOOKINGS,
+         UPDATE_HOUSE_BOOKINGS
+                        } from './types';
 
 const axiosInstance = axiosService.getInstance();
 
 export const verifyRentalOwner = (rentalId) => {
   return axiosInstance.get(`/rentals/${rentalId}/verify-user`);
+}
+export const verifyHouseOwner = (houseId) => {
+  return axiosInstance.get(`/houses/${houseId}/verify-user`);
 }
 
 export const reloadMap = () => {
@@ -38,11 +54,17 @@ export const reloadMapFinish = () => {
   }
 }
 
-// RENTALS ATIONS ---------------------------
+// RENTALS AND HOUSES ATIONS ---------------------------
 
 const fetchRentalByIdInit = () => {
   return {
     type: FETCH_RENTAL_BY_ID_INIT
+  }
+}
+
+const fetchHouseByIdInit = () => {
+  return {
+    type: FETCH_HOUSE_BY_ID_INIT
   }
 }
 
@@ -53,6 +75,14 @@ const fetchRentalByIdSuccess = (rental) => {
   }
 }
 
+const fetchHouseByIdSuccess = (house) => {
+  return {
+    type: FETCH_HOUSE_BY_ID_SUCCESS,
+    house
+  }
+}
+
+
 const fetchRentalsSuccess = (rentals) => {
   return {
     type: FETCH_RENTALS_SUCCESS,
@@ -60,15 +90,36 @@ const fetchRentalsSuccess = (rentals) => {
   }
 }
 
+const fetchHousesSuccess = (houses) => {
+  return {
+    type: FETCH_HOUSES_SUCCESS,
+    houses
+  }
+}
+
+
 const fetchRentalsInit = () => {
   return {
     type: FETCH_RENTALS_INIT
   }
 }
 
+const fetchHousesInit = () => {
+  return {
+    type: FETCH_HOUSES_INIT
+  }
+}
+
 const fetchRentalsFail = (errors) => {
   return {
     type: FETCH_RENTALS_FAIL,
+    errors
+  }
+}
+
+const fetchHousesFail = (errors) => {
+  return {
+    type: FETCH_HOUSES_FAIL,
     errors
   }
 }
@@ -86,6 +137,19 @@ export const fetchRentals = (city) => {
   }
 }
 
+export const fetchHouses = (city) => {
+  const url = city ? `/houses?city=${city}` : '/houses';
+
+  return dispatch => {
+    dispatch(fetchHousesInit());
+
+    axiosInstance.get(url)
+      .then(res => res.data )
+      .then(houses => dispatch(fetchHousesSuccess(houses)))
+      .catch(({response}) => dispatch(fetchHousesFail(response.data.errors)))
+  }
+}
+
 export const fetchRentalById = (rentalId) => {
   return function(dispatch) {
     dispatch(fetchRentalByIdInit());
@@ -98,8 +162,27 @@ export const fetchRentalById = (rentalId) => {
   }
 }
 
+export const fetchHouseById = (houseId) => {
+  return function(dispatch) {
+    dispatch(fetchHouseByIdInit());
+
+    return axios.get(`/api/v1/houses/${houseId}`)
+      .then(res => res.data )
+      .then(house => {dispatch(fetchHouseByIdSuccess(house));
+          return house;
+      })
+  }
+}
+
 export const createRental = (rentalData) => {
   return axiosInstance.post('/rentals', rentalData).then(
+    res => res.data,
+    err => Promise.reject(err.response.data.errors)
+  )
+}
+
+export const createHouse = (houseData) => {
+  return axiosInstance.post('/houses', houseData).then(
     res => res.data,
     err => Promise.reject(err.response.data.errors)
   )
@@ -111,6 +194,12 @@ export const resetRentalErrors = () => {
   }
 }
 
+export const resetHouseErrors = () => {
+  return {
+    type: RESET_HOUSE_ERRORS
+  }
+}
+
 const updateRentalSuccess = (updatedRental) => {
   return {
     type: UPDATE_RENTAL_SUCCESS,
@@ -118,9 +207,23 @@ const updateRentalSuccess = (updatedRental) => {
   }
 }
 
+const updateHouseSuccess = (updatedHouse) => {
+  return {
+    type: UPDATE_HOUSE_SUCCESS,
+    rental: updatedHouse
+  }
+}
+
 const updateRentalFail = (errors) => {
   return {
     type: UPDATE_RENTAL_FAIL,
+    errors
+  }
+}
+
+const updateHouseFail = (errors) => {
+  return {
+    type: UPDATE_HOUSE_FAIL,
     errors
   }
 }
@@ -138,6 +241,19 @@ export const updateRental = (id, rentalData) => dispatch => {
     .catch(({response}) => dispatch(updateRentalFail(response.data.errors)))
 }
 
+export const updateHouse = (id, houseData) => dispatch => {
+  return axiosInstance.patch(`/houses/${id}`, houseData)
+    .then(res => res.data)
+    .then(updatedHouse => {
+      dispatch(updateHouseSuccess(updatedHouse));
+
+      if (houseData.city || houseData.street) {
+        dispatch(reloadMap());
+      }
+    })
+    .catch(({response}) => dispatch(updateHouseFail(response.data.errors)))
+}
+
 // USER BOOKINGS ACTIONS ---------------------------
 
 const fetchUserBookingsInit = () => {
@@ -146,16 +262,37 @@ const fetchUserBookingsInit = () => {
   }
 }
 
-const fetchUserBookingsSuccess = (userBookings) => {
+const fetchUserHouseBookingsInit = () => {
+  return {
+    type: FETCH_USER_HOUSE_BOOKINGS_INIT
+  }
+}
+
+const fetchUserBookingsSuccess = (userHouseBookings) => {
   return {
     type: FETCH_USER_BOOKINGS_SUCCESS,
-    userBookings
+    userHouseBookings
+  }
+}
+
+
+const fetchUserHouseBookingsSuccess = (userHouseBookings) => {
+  return {
+    type: FETCH_USER_HOUSE_BOOKINGS_SUCCESS,
+    userHouseBookings
   }
 }
 
 const fetchUserBookingsFail = (errors) => {
   return {
     type: FETCH_USER_BOOKINGS_FAIL,
+    errors
+  }
+}
+
+const fetchUserHouseBookingsFail = (errors) => {
+  return {
+    type: FETCH_USER_HOUSE_BOOKINGS_FAIL,
     errors
   }
 }
@@ -171,12 +308,29 @@ export const fetchUserBookings = () => {
   }
 }
 
-// USER RENTALS ACTIONS ---------------------------
+export const fetchUserHouseBookings = () => {
+  return dispatch => {
+    dispatch(fetchUserHouseBookingsInit());
+
+    axiosInstance.get('/housebookings/manage')
+      .then(res => res.data )
+      .then(userHouseBookings => dispatch(fetchUserHouseBookingsSuccess(userHouseBookings)))
+      .catch(({response}) => dispatch(fetchUserHouseBookingsFail(response.data.errors)))
+  }
+}
+// USER RENTALS AND HOUSES ACTIONS ---------------------------
 
 export const updateBookings = (bookings) =>{
   return{
     type:UPDATE_BOOKINGS,
     bookings
+  }
+}
+
+export const updateHouseBookings = (houseBookings) =>{
+  return{
+    type:UPDATE_HOUSE_BOOKINGS,
+    houseBookings
   }
 }
 
@@ -187,8 +341,21 @@ export const getUserRentals = () => {
   )
 }
 
+export const getUserHouses = () => {
+  return axiosInstance.get('/houses/manage').then(
+    res => res.data,
+    err => Promise.reject(err.response.data.errors)
+  )
+}
+
 export const deleteRental = (rentalId) => {
   return axiosInstance.delete(`/rentals/${rentalId}`).then(
+    res => res.data,
+    err => Promise.reject(err.response.data.errors))
+}
+
+export const deleteHouse = (houseId) => {
+  return axiosInstance.delete(`/houses/${houseId}`).then(
     res => res.data,
     err => Promise.reject(err.response.data.errors))
 }
@@ -254,6 +421,12 @@ export const createBooking = (booking) => {
       .catch(({response}) => Promise.reject(response.data.errors))
 }
 
+export const createHouseBooking = (houseBooking) => {
+  return axiosInstance.post('/housebookings', houseBooking)
+      .then(res => res.data)
+      .catch(({response}) => Promise.reject(response.data.errors))
+}
+
 
 
 export const uploadImage = image => {
@@ -267,14 +440,26 @@ export const uploadImage = image => {
     .catch(({response}) => Promise.reject(response.data.errors[0]))
 }
 
-export const createReview=(reviewData,bookingId)=>{
-  return axiosInstance.post(`/reviews?bookingId=${bookingId}`,reviewData)
+export const createReview=(reviewData,housebookingId)=>{
+  return axiosInstance.post(`/reviews?housebookingId=${housebookingId}`,reviewData)
+  .then(res=>res.data)
+  .catch(({response}) => Promise.reject(response.data.errors[0]))
+}
+
+export const createHouseReview=(reviewHData,houseBookingId)=>{
+  return axiosInstance.post(`/reviews?bookingId=${houseBookingId}`,reviewHData)
   .then(res=>res.data)
   .catch(({response}) => Promise.reject(response.data.errors[0]))
 }
 
 export const getReviews=(rentalId)=>{
   return axiosInstance.get(`/reviews?rentalId=${rentalId}`)
+  .then(res => res.data)
+  .catch(({response}) => Promise.reject(response.data.errors[0]))
+}
+
+export const getHouseReviews=(houseId)=>{
+  return axiosInstance.get(`/reviews?houseId=${houseId}`)
   .then(res => res.data)
   .catch(({response}) => Promise.reject(response.data.errors[0]))
 }

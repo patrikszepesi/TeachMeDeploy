@@ -1,11 +1,11 @@
 import React from 'react';
-import RentalCreateForm from './RentalCreateForm';
+import HouseCreateForm from './HouseCreateForm';
 import { Redirect } from 'react-router-dom';
 //
 
 import * as actions from 'actions';
 
-export class RentalCreate extends React.Component {
+export class HouseCreate extends React.Component {
 
   constructor() {
     super();
@@ -15,21 +15,21 @@ export class RentalCreate extends React.Component {
       redirect: false
     }
 
-    this.rentalCateogies = ['Egyetemi Tanár', 'Főiskolai Tanár','Középiskolai Tanár','Phd Hallgató', 'Teljes Állásban dolgozó','Gyakornok','Egyetemi Demonstrátor','Harmadéves Hallgató','Másodéves Hallgató','Elsőéves Hallgató','Középiskolai Diák','Egyéb'];
+    this.houseCategories = ['Egyetemi Tanár', 'Főiskolai Tanár','Középiskolai Tanár','Phd Hallgató', 'Teljes Állásban dolgozó','Gyakornok','Egyetemi Demonstrátor','Harmadéves Hallgató','Másodéves Hallgató','Elsőéves Hallgató','Középiskolai Diák','Egyéb'];
 
-    this.createRental = this.createRental.bind(this);
+    this.createHouse = this.createHouse.bind(this);
   }
 
-  createRental(rentalData) {
+  createHouse(houseData) {
 
-    actions.createRental(rentalData).then(
-      (rental) => this.setState({redirect: true}),
+    actions.createHouse(houseData).then(
+      (house) => this.setState({redirect: true}),
       (errors) => this.setState({errors}))
   }
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={{pathname:'/rentals'}}/>
+      return <Redirect to={{pathname:'/houses'}}/>
     }
 
     return (
@@ -44,13 +44,13 @@ export class RentalCreate extends React.Component {
 
               <img src={process.env.PUBLIC_URL + '/img/3.png'} alt=''/>
                 <h1 className='page-title'>Legyél te is Oktató</h1>
-            
+
                 <h6>Ügyelj arra, hogy a tantárgyad nevét pontosan írd ki pl.(Opkut helyett Írd, hogy Operációkutatás)</h6>
                 <div className='col-md-15'>
 
 
-                  <RentalCreateForm submitCb={this.createRental}
-                                    options={this.rentalCateogies}
+                  <HouseCreateForm submitCb={this.createHouse}
+                                    options={this.houseCategories}
 
                                     errors={this.state.errors}/>
                 </div>

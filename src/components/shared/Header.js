@@ -13,7 +13,7 @@ class Header extends React.Component {
 
   handleLogout() {
     this.props.logout();
-    this.props.history.push('/rentals');
+    this.props.history.push('/');
   }
 
   renderAuthButtons(isAuth) {
@@ -51,7 +51,7 @@ class Header extends React.Component {
       <nav className='navbar navbar-dark navbar-expand-lg'>
         <div className='container'>
 
-          <Link className='navbar-brand' to='/rentals'>YouTeach
+          <Link className='navbar-brand' to='/'>YouTeach
 
 
           </Link>

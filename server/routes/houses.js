@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Rental = require('../models/rental');
-const User = require('../models/user');
-const { normalizeErrors } = require('../helpers/mongoose');
+const House = require('../models/house');
+
+
 
 const UserCtrl = require('../controllers/user');
 
@@ -13,80 +13,80 @@ router.get('/secret', UserCtrl.authMiddleware, function(req, res) {
 router.get('/manage',  UserCtrl.authMiddleware, function(req, res) {
   const user = res.locals.user;
 
-  Rental
+  House
     .where({user})
-    .populate('bookings')
-    .exec(function(err, foundRentals) {
+    .populate('bookingsH')
+    .exec(function(err, foundHouses) {
 
     if (err) {
       return res.status(422).send({errors: normalizeErrors(err.errors)});
     }
 
-    return res.json(foundRentals);
+    return res.json(foundHouses);
   });
 });
 
 router.get('/:id/verify-user', UserCtrl.authMiddleware, function(req, res) {
   const user = res.locals.user;
 
-  Rental
+  House
     .findById(req.params.id)
     .populate('user')
-    .exec(function(err, foundRental) {
+    .exec(function(err, foundHouse) {
 
       if (err) {
         return res.status(422).send({errors: normalizeErrors(err.errors)});
       }
 
-      if (foundRental.user.id !== user.id) {
-        return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'You are not rental owner!'}]});
+      if (foundHouse.user.id !== user.id) {
+        return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'Nem vagy tulajdonos!'}]});
       }
 
       return res.json({status: 'verified'});
     });
 });
 
-router.get('/:id', function(req, res) {
-  const rentalId = req.params.id;
+router.get('/:id', function (req, res) {
+  const houseId = req.params.id;
 
-  Rental.findById(rentalId)
+  House.findById(houseId)
         .populate('user', 'username -_id')
-        .populate('bookings', 'startAt endAt -_id')
-        .exec(function(err, foundRental) {
+        .populate('bookingsH', 'startAt endAt -_id')
+        .exec(function(err, foundHouse) {
 
     if (err) {
-      return res.status(422).send({errors: [{title: 'Rental Error!', detail: 'Nem találtuk a tanárt!'}]});
+      return res.status(422).send({errors: [{title: 'House Error!', detail: 'Nem találtuk a lakást!'}]});
     }
 
-    return res.json(foundRental);
+    return res.json(foundHouse);
   });
 });
 
 router.patch('/:id', UserCtrl.authMiddleware, function(req, res) {
 
-  const rentalData = req.body;
+  const houseData = req.body;
   const user = res.locals.user;
 
-  Rental
+  House
     .findById(req.params.id)
     .populate('user')
-    .exec(function(err, foundRental) {
+    .exec(function(err, foundHouse) {
 
       if (err) {
         return res.status(422).send({errors: normalizeErrors(err.errors)});
       }
 
-      if (foundRental.user.id !== user.id) {
+      if (foundHouse.user.id !== user.id) {
         return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'You are not an owner!'}]});
       }
 
-      foundRental.set(rentalData);
-      foundRental.save(function(err) {
+      foundHouse.set(houseData);
+      foundHouse.save(function(err) {
         if (err) {
           return res.status(422).send({errors: normalizeErrors(err.errors)});
         }
 
-        return res.status(200).send(foundRental);
+        return res.status(200).send(foundHouse);
       });
     });
 });
@@ -94,29 +94,29 @@ router.patch('/:id', UserCtrl.authMiddleware, function(req, res) {
 router.delete('/:id', UserCtrl.authMiddleware, function(req, res) {
   const user = res.locals.user;
 
-  Rental
+  House
     .findById(req.params.id)
     .populate('user', '_id')
     .populate({
-      path: 'bookings',
-      select: 'startAt',
-      match: { startAt: { $gt: new Date()}}
+      path: 'bookingsH',
+      select: 'startAtH',
+      match: { startAtH: { $gt: new Date()}}
     })
-    .exec(function(err, foundRental) {
+    .exec(function(err, foundHouse) {
 
     if (err) {
       return res.status(422).send({errors: normalizeErrors(err.errors)});
     }
 
-    if (user.id !== foundRental.user.id) {
-      return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'You are not rental owner!'}]});
+    if (user.id !== foundHouse.user.id) {
+      return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'Nem vagy tulajdonos!'}]});
     }
 
-    if (foundRental.bookings.length > 0) {
+    if (foundHouse.bookingsH.length > 0) {
       return res.status(422).send({errors: [{title: 'Active Bookings!', detail: 'Cannot delete rental with active bookings!'}]});
     }
 
-    foundRental.remove(function(err) {
+    foundHouse.remove(function(err) {
       if (err) {
         return res.status(422).send({errors: normalizeErrors(err.errors)});
       }
@@ -127,20 +127,20 @@ router.delete('/:id', UserCtrl.authMiddleware, function(req, res) {
 });
 
 router.post('', UserCtrl.authMiddleware, function(req, res) {
-  const { title, city, street, category, image, shared, bedrooms, description, dailyRate,city2,name2,username,major,contact2,email,available,when,reserve,role } = req.body;
+  const { titleH, cityH, streetH, categoryH, imageH,sharedH, bedroomsH, descriptionH, monthlyRateH,username,emailH,availableH,reserveH } = req.body;
   const user = res.locals.user;
 
-  const rental = new Rental({title, city, street, category, image,shared, bedrooms, description, dailyRate,city2,name2,username,major,contact2,email,available,when,reserve,role});
-  rental.user = user;
-//
-  Rental.create(rental, function(err, newRental) {
+  const house = new House({titleH, cityH, streetH, categoryH, imageH,sharedH, bedroomsH, descriptionH, monthlyRateH,username,emailH,availableH,reserveH});
+  house.user = user;
+
+  House.create(house, function(err, newHouse) {
     if (err) {
       return res.status(422).send({errors: normalizeErrors(err.errors)});
     }
 
-    User.update({_id: user.id}, { $push: {rentals: newRental}}, function(){});
+    User.update({_id: user.id}, { $push: {houses: newHouse}}, function(){});
 
-    return res.json(newRental);
+    return res.json(newHouse);
   });
 });
 
@@ -148,19 +148,19 @@ router.get('', function(req, res) {
   const city = req.query.city;
   const query = city ? {city: city.toLowerCase()} : {};
 
-  Rental.find(query)
-      .select('-bookings')
-      .exec(function(err, foundRentals) {
+  House.find(query)
+      .select('-bookingsH')
+      .exec(function(err, foundHouses) {
 
     if (err) {
       return res.status(422).send({errors: normalizeErrors(err.errors)});
     }
 
-    if (city && foundRentals.length === 0) {
+    if (city && foundHouses.length === 0) {
       return res.status(422).send({errors: [{title: 'No Rentals Found!', detail: `nincs ilyen oktató`}]});
     }
 
-    return res.json(foundRentals);
+    return res.json(foundHouses);
   });
 });
 

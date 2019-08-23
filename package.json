@@ -9,7 +9,7 @@
   "proxy": {
     "api/v1/*": {
       "target": "http://localhost:3001"
-    }
+    },
   },
   "dependencies": {
     "aws-sdk": "^2.309.0",

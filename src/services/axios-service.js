@@ -8,7 +8,7 @@ class AxiosService {
   constructor() {
     this.initInstance();
   }
-
+//
   initInstance() {
     this.axiosInstance = axios.create({
       baseURL: '/api/v1',
